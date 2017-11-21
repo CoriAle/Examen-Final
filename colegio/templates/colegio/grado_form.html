@@ -1,0 +1,16 @@
+{% extends 'colegio/base.html'%}
+{% block content %}
+  <div class="col-md-10 offset-1">
+    <div class="card">
+      <div class="card-block p-5">
+   <form  method="post">
+    <h2>Mascota</h2>
+    <br>
+    {% csrf_token %}
+    {{ form.as_p }}
+
+    <button type="submit" class="btn btn-primary float-right btn-big">Guardar</button>
+  </form>
+</div>
+</div>
+{% endblock %}

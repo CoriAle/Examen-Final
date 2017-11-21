@@ -12,6 +12,12 @@ def grado_nuevo(request):
         form = GradoForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
+            return redirect('grado_list')
     else:
         form = GradoForm()
     return render(request, 'colegio/grado_form.html', {'form': form})
+
+def grado_list(request):
+    grado = Grado.objects.all()
+    contexto = {'grados': grado}
+    return render(request, 'colegio/grado_list.html', contexto)

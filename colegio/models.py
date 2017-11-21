@@ -3,7 +3,6 @@ from django.utils import timezone
 from django.contrib import admin
 
 class Alumno(models.Model):
-    """docstring for Vacuna."""
     carnet=models.CharField(max_length=50)
     nombre=models.CharField(max_length=50)
     apellido=models.CharField(max_length=50)
@@ -13,7 +12,6 @@ class Alumno(models.Model):
         return '{}'.format(self.nombre)
 
 class Profesor(models.Model):
-    """docstring for Vacuna."""
     nombre=models.CharField(max_length=50)
     apellido=models.CharField(max_length=50)
     fecha_nacimiento = models.DateField()
@@ -23,11 +21,10 @@ class Profesor(models.Model):
         return '{}'.format(self.nombre)
 
 class Materia(models.Model):
-    """docstring for Vacuna."""
     nombre=models.CharField(max_length=50)
     creditos= models.IntegerField()
     alumno = models.ManyToManyField(Alumno, through='Nota')
-
+    profesor = models.ForeignKey(Profesor,null=True )
     def __str__(self):
         return '{}'.format(self.nombre)
 
@@ -47,7 +44,10 @@ class AlumnoAdmin (admin.ModelAdmin):
     inlines = (NotaInLine,)
 
 class Grado(models.Model):
-    """docstring forMascota."""
+    """docstring forGrado."""
     nombre = models.CharField(max_length=50)
     seccion = models.CharField(max_length=10)
     materia = models.ManyToManyField(Materia, blank=True)
+
+    def __str__(self):
+        return '{}'.format(self.nombre)
